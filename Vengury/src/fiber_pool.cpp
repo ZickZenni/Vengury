@@ -43,10 +43,10 @@ namespace Vengury
 			m_jobs.pop();
 			lock.unlock();
 
-			const auto player = PLAYER::PLAYER_ID();
-
-			if (!PLAYER::IS_PLAYER_PLAYING(player))
+			if (!ENTITY::DOES_ENTITY_EXIST(PLAYER::PLAYER_PED_ID()))
 				return;
+
+			const auto player = PLAYER::PLAYER_ID();
 
 			Ped ped;
 

@@ -3,7 +3,7 @@
 namespace player {
     bool GetPlayerPed(Player player, Ped* player_ped)
     {
-        if (!(PLAYER::IS_PLAYER_PLAYING(PLAYER::PLAYER_ID()) && PLAYER::IS_PLAYER_PLAYING(player)))
+        if (!ENTITY::DOES_ENTITY_EXIST(PLAYER::PLAYER_PED_ID()))
             return false;
 
         const auto ped = PLAYER::GET_PLAYER_PED(player);
