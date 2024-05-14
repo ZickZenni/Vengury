@@ -3,6 +3,9 @@
 A mod menu for Grand Theft Auto V.
 Strictly for educational purposes.
 
+It's based on BigBaseV2 and includes updated classes with [GTAClasses](https://github.com/Yimura/GTAV-Classes), later also adding Lua Scripting support.
+This project isn't possible without the help of [YimMenu](https://github.com/YimMenu/YimMenu/)!
+
 ## Features
 * ImGui–based user interface
 * Unloading at runtime
