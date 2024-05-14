@@ -13,6 +13,8 @@
 #include <gta/net_game_event.hpp>
 #include <net/packet.hpp>
 #include <util/math.hpp>
+#include <gta/joaat.hpp>
+#include <service/object_service.hpp>
 
 namespace Vengury {
 	void SessionTab::Render()
@@ -243,8 +245,27 @@ namespace Vengury {
 
 			ImGui::SameLine();
 
-			if (ImGui::BeginChild("#griefing", ImVec2(400.f, 100.f), 0, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoBackground)) {
+			if (ImGui::BeginChild("#griefing", ImVec2(400.f, 0.f), 0, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoBackground)) {
 				ImGuiWidgets::SeparatorText("Griefing");
+
+				/*if (ImGui::Button("Cage Player")) {
+					g_fiber_pool->QueueJob([](RagePlayer player, Ped ped, Vehicle vehicle) {
+						Ped targetPed;
+
+						if (!player::GetPlayerPed(g_player_service->GetIdFromPeerId(g_player_service->m_selected_peer), &targetPed))
+							return;
+
+						const auto targetPos = ENTITY::GET_ENTITY_COORDS(targetPed, false);
+						const auto object = g_object_service->Create("prop_dog_cage_02"_J, targetPos.x, targetPos.y, targetPos.z, false);
+
+						if (!object)
+							return;
+
+						ENTITY::FREEZE_ENTITY_POSITION(object, true);
+
+						g_notification_service->PushNotification("Caged player.", 1500, NotificationType::Subtitle);
+					});
+				}*/
 
 				if (ImGui::Button("Explode Player")) {
 					g_fiber_pool->QueueJob([](RagePlayer player, Ped ped, Vehicle vehicle) {
@@ -436,6 +457,35 @@ namespace Vengury {
 					vehicle::RepairVehicle(vehicle);
 					g_notification_service->PushNotification("Repaired vehicle from player.", 1500, NotificationType::Subtitle);
 				});
+			}
+
+			ImGui::SameLine();
+
+			if (ImGui::Button("Crumble Vehicle")) {
+				g_fiber_pool->QueueJob([](RagePlayer player, Ped ped, Vehicle localVehicle) {
+					Ped targetPed;
+
+					if (!player::GetPlayerPed(g_player_service->GetIdFromPeerId(g_player_service->m_selected_peer), &targetPed))
+						return;
+
+					Vehicle vehicle;
+
+					if (!vehicle::GetVehicle(targetPed, &vehicle))
+						return;
+
+					float x, y, z, damage, radius;
+
+					x = Random(-1.0f, 1.0f);
+					y = Random(-1.0f, 1.0f);
+					z = Random(-1.0f, 1.0f);
+					damage = Random(1000.0f, 10000.0f);
+					radius = Random(100.0f, 1000.0f);
+
+					entity::TakeControlOf(vehicle, 30);
+					VEHICLE::SET_VEHICLE_DAMAGE(vehicle, x, y, z, damage, radius, true);
+
+					g_notification_service->PushNotification("Cumbled vehicle from player.", 1500, NotificationType::Subtitle);
+					});
 			}
 
 			ImGui::SameLine();
