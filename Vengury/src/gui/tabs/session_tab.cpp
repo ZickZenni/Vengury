@@ -275,7 +275,7 @@ namespace Vengury {
 						Packet msg{};
 
 						msg.write_message(rage::eNetMessage::MsgRadioStationSyncRequest);
-						auto msg_id = sessionPlayer->m_msg_id;
+						auto msg_id = static_cast<uint32_t>(sessionPlayer->m_msg_id);
 
 						for (int j = 0; j < 2000; j++)
 						{

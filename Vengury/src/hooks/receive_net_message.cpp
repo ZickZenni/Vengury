@@ -81,7 +81,7 @@ namespace Vengury {
 		rage::eNetMessage msgType;
 		PlayerPtr player = nullptr;
 
-		for (uint32_t i = 0; i < gta_util::GetNetwork()->m_game_session_ptr->m_player_count; i++)
+		for (int32_t i = 0; i < gta_util::GetNetwork()->m_game_session_ptr->m_player_count; i++)
 		{
 			if (auto player_iter = gta_util::GetNetwork()->m_game_session_ptr->m_players[i])
 			{
