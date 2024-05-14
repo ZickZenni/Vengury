@@ -12,7 +12,7 @@
 #include <network/snSession.hpp>
 #include <gta/net_game_event.hpp>
 #include <net/packet.hpp>
-#include <math.hpp>
+#include <util/math.hpp>
 
 namespace Vengury {
 	void SessionTab::Render()
