@@ -27,14 +27,11 @@ namespace Vengury
 
 	void FiberPool::QueueJob(std::function<void(RagePlayer player, Ped ped, Vehicle vehicle)> func)
 	{
-		__try {
-			if (func)
-			{
-				std::lock_guard lock(m_mutex);
-				m_jobs.push(std::move(func));
-			}
+		if (func)
+		{
+			std::lock_guard lock(m_mutex);
+			m_jobs.push(std::move(func));
 		}
-		__except (Script::ScriptExceptionHandler(GetExceptionInformation()), EXCEPTION_EXECUTE_HANDLER) {}
 	}
 
 	void FiberPool::FiberTick()

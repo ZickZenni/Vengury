@@ -420,7 +420,6 @@ MigrationBackup/
 
 ### Project specific ###
 bin/
-vendor/
 *.sln
 *.vcxproj
 *.vcxproj.filters

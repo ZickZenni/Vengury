@@ -31,6 +31,7 @@ workspace "Vengury"
     systemversion (WindowsSdkVersion)
     toolset (MsvcToolset)
     cppdialect (CppVersion)
+    buildoptions("/utf-8")
 
     defines
     {
